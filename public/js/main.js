@@ -42,7 +42,7 @@ chatForm.addEventListener('submit', (e) => {
   }
 
   // Emit message to server
-  socket.emit('chatMessage', '0.00');
+  socket.emit('chatMessage', msg);
 
   // Clear input
   e.target.elements.msg.value = '';
