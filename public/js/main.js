@@ -8,12 +8,10 @@ const { username, room } = Qs.parse(location.search, {
   ignoreQueryPrefix: true,
 });
 
-const u = {'username':username,'room':room,,'deparment':'','fullname':username,'pic':'','inout':'',"license":''}
-
 const socket = io();
 
 // Join chatroom
-socket.emit('joinRoom', u);
+socket.emit('joinRoom', { username, room });
 
 // Get room and users
 socket.on('roomUsers', ({ room, users }) => {
@@ -77,7 +75,7 @@ function outputUsers(users) {
   userList.innerHTML = '';
   users.forEach((user) => {
     const li = document.createElement('li');
-    li.innerText = user.fullname;
+    li.innerText = user.username;
     userList.appendChild(li);
   });
 }
