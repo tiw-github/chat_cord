@@ -28,13 +28,9 @@ function getRoomUsers(room) {
   return users.filter(user => user.room === room);
 }
 
-function getTime(){
-return '0:00';
-}
 module.exports = {
   userJoin,
   getCurrentUser,
   userLeave,
-  getRoomUsers,
-  getTime
+  getRoomUsers
 };

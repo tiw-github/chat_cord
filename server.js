@@ -8,7 +8,6 @@ const {
   getCurrentUser,
   userLeave,
   getRoomUsers,
-  getTime
 } = require('./utils/users');
 
 const app = express();
@@ -28,14 +27,14 @@ io.on('connection', socket => {
     socket.join(user.room);
 
     // Welcome current user
-    socket.emit('message', formatMessage(botName, 'Welcome to Chat room!',getTime));
+    socket.emit('message', formatMessage(botName, 'Welcome to Chat room!'));
 
     // Broadcast when a user connects
     socket.broadcast
       .to(user.room)
       .emit(
         'message',
-        formatMessage(botName, `${user.fullname}  has joined the chat`,getTime)
+        formatMessage(botName, `${user.fullname}  has joined the chat`)
       );
 
     // Send users and room info
@@ -49,7 +48,7 @@ io.on('connection', socket => {
   socket.on('chatMessage', {msg,time} => {
     const user = getCurrentUser(socket.id);
 
-    io.to(user.room).emit('message', formatMessage(user.username, msg,time));
+    io.to(user.room).emit('message', formatMessage(user.username, msg));
   });
 
   // Runs when client disconnects
@@ -59,7 +58,7 @@ io.on('connection', socket => {
     if (user) {
       io.to(user.room).emit(
         'message',
-        formatMessage(botName, `${user.username} has left the chat`,getTime)
+        formatMessage(botName, `${user.username} has left the chat`)
       );
 
       // Send users and room info
