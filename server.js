@@ -18,11 +18,11 @@ const io = socketio(server);
 app.use(express.static(path.join(__dirname, 'public')));
 
 const botName = 'ผีเฝ้าห้อง';
-
+let numUsers = 0;
 // Run when client connects
 io.on('connection', socket => {
-  socket.on('joinRoom', ({ username, room }) => {
-    const user = userJoin(socket.id, username, room);
+  socket.on('joinRoom', ({ username, room ,deparment,fullname,pic,inout,license}) => {
+    const user = userJoin(socket.id, username, room,deparment,fullname,pic,inout,license);
 
     socket.join(user.room);
 
@@ -34,7 +34,7 @@ io.on('connection', socket => {
       .to(user.room)
       .emit(
         'message',
-        formatMessage(botName, `${user.username} has joined the chat`)
+        formatMessage(botName, `${user.fullname} has joined the chat`)
       );
 
     // Send users and room info
