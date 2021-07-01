@@ -42,7 +42,7 @@ chatForm.addEventListener('submit', (e) => {
   }
 
   // Emit message to server
-  socket.emit('chatMessage', {msg,datetime()});
+  socket.emit('chatMessage', '0.00');
 
   // Clear input
   e.target.elements.msg.value = '';
@@ -80,36 +80,6 @@ function outputUsers(users) {
   });
 }
 
-function datetime(){
-    let date_ob = new Date();
-
-// current date
-// adjust 0 before single digit date
-    let date = ("0" + date_ob.getDate()).slice(-2);
-
-// current month
-    let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
-
-// current year
-    let year = date_ob.getFullYear();
-
-// current hours
-    let hours = date_ob.getHours();
-
-// current minutes
-    let minutes = date_ob.getMinutes();
-
-// current seconds
-    let seconds = date_ob.getSeconds();
-
-// prints date in YYYY-MM-DD format
-    console.log(year + "-" + month + "-" + date);
-
-// prints date & time in YYYY-MM-DD HH:MM:SS format
-
-    const time = year + "-" + month + "-" + date + " " + hours + ":" + minutes + ":" + seconds;
-    return time;
-}
 //Prompt the user before leave chat room
 document.getElementById('leave-btn').addEventListener('click', () => {
   const leaveRoom = confirm('Are you sure you want to leave the chatroom?');

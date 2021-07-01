@@ -2,7 +2,7 @@ const path = require('path');
 const http = require('http');
 const express = require('express');
 const socketio = require('socket.io');
-const formatMessage = require('./utils/messages');
+const {formatMessage,formatMessage2} = require('./utils/messages');
 const {
   userJoin,
   getCurrentUser,
@@ -49,7 +49,7 @@ io.on('connection', socket => {
   socket.on('chatMessage', ({msg,time}) => {
     const user = getCurrentUser(socket.id);
 
-    io.to(user.room).emit('message', formatMessage(user.fullname, msg,time));
+    io.to(user.room).emit('message', formatMessage2(user.fullname, msg,time));
   });
 
   // Runs when client disconnects
@@ -58,7 +58,7 @@ io.on('connection', socket => {
 
     if (user) {
 
-    if(numUsers>0){--numUsers}
+     --numUsers
 
       io.to(user.room).emit(
         'message',
