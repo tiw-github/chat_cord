@@ -32,6 +32,11 @@ socket.on('message', (message) => {
 chatForm.addEventListener('submit', (e) => {
   e.preventDefault();
 
+    var today = new Date();
+    var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+    var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+    var dateTime = date+' '+time;
+
   // Get message text
   let msg = e.target.elements.msg.value;
 
@@ -42,7 +47,7 @@ chatForm.addEventListener('submit', (e) => {
   }
 
   // Emit message to server
-  socket.emit('chatMessage', msg);
+  socket.emit('chatMessage', {msg,dateTime});
 
   // Clear input
   e.target.elements.msg.value = '';

@@ -21,11 +21,12 @@ const botName = 'ผีเฝ้าห้อง';
 let numUsers = 0;
 // Run when client connects
 io.on('connection', socket => {
+
   socket.on('joinRoom', ({ username, room ,deparment,fullname,pic,inout,license}) => {
     const user = userJoin(socket.id, username, room,deparment,fullname,pic,inout,license);
 
     socket.join(user.room);
-
+    ++numUsers;
     // Welcome current user
     socket.emit('message', formatMessage(botName, '  Welcome to Chat room!'));
 
@@ -56,9 +57,12 @@ io.on('connection', socket => {
     const user = userLeave(socket.id);
 
     if (user) {
+
+    if(numUsers>0){--numUsers}
+
       io.to(user.room).emit(
         'message',
-        formatMessage(botName, `${user.username} has left the chat`)
+        formatMessage(botName, `${user.fullname} has left the chat`)
       );
 
       // Send users and room info
