@@ -40,9 +40,9 @@ chatForm.addEventListener('submit', (e) => {
   if (!msg) {
     return false;
   }
-
+    let time = '0:00';
   // Emit message to server
-  socket.emit('chatMessage', msg);
+  socket.emit('chatMessage', {msg,time});
 
   // Clear input
   e.target.elements.msg.value = '';
