@@ -27,7 +27,7 @@ io.on('connection', socket => {
     socket.join(user.room);
 
     // Welcome current user
-    socket.emit('message', formatMessage(botName, '  Welcome to Chat room!'));
+    socket.emit('message', formatMessage(botName, 'Welcome to Chat room!'));
 
     // Broadcast when a user connects
     socket.broadcast
@@ -45,10 +45,10 @@ io.on('connection', socket => {
   });
 
   // Listen for chatMessage
-  socket.on('chatMessage', ({msg,time}) => {
+  socket.on('chatMessage', msg => {
     const user = getCurrentUser(socket.id);
 
-    io.to(user.room).emit('message', formatMessage(user.fullname, msg));
+    io.to(user.room).emit('message', formatMessage(user.username, msg));
   });
 
   // Runs when client disconnects
