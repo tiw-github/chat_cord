@@ -1,12 +1,17 @@
 const moment = require('moment');
 
 function formatMessage(username, text) {
-var d = new Date();
-var n = d.toLocaleTimeString();
   return {
     username,
     text,
-    n
+    time: moment().format('h:mm a')
+  };
+}
+function formatMessage(username, text,time) {
+  return {
+    username,
+    text,
+    time
   };
 }
 
