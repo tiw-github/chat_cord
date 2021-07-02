@@ -47,12 +47,12 @@ io.on('connection', socket => {
   });
 
   // Listen for chatMessage
-  socket.on('chatMessage', ({msg,pic}) => {
+  socket.on('chatMessage', (data) => {
     const user = getCurrentUser(socket.id);
 
     io.to(user.room).emit('message', {
     username: user.username,
-    text: msg,
+    text: data,
     time: moment().format('HH:mm:ss'),
     pic: pic
     });
