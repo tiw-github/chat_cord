@@ -2,6 +2,7 @@ const path = require('path');
 const http = require('http');
 const express = require('express');
 const socketio = require('socket.io');
+const moment = require('moment');
 const formatMessage = require('./utils/messages');
 const {
   userJoin,
@@ -49,7 +50,13 @@ io.on('connection', socket => {
   socket.on('chatMessage', ({msg,pic}) => {
     const user = getCurrentUser(socket.id);
 
-    io.to(user.room).emit('message', formatMessage(user.username, msg,pic));
+    io.to(user.room).emit('message', {
+    username:user,fullname,
+    text:msg,
+    time: moment().format('HH:mm:ss'),
+    pic:pic
+    });
+
   });
 
   // Runs when client disconnects
