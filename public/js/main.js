@@ -34,6 +34,7 @@ chatForm.addEventListener('submit', (e) => {
 
   // Get message text
   let msg = e.target.elements.msg.value;
+  let pic = 'bo';
 
   msg = msg.trim();
 
@@ -42,7 +43,7 @@ chatForm.addEventListener('submit', (e) => {
   }
 
   // Emit message to server
-  socket.emit('chatMessage', msg);
+  socket.emit('chatMessage', {msg,pic});
 
   // Clear input
   e.target.elements.msg.value = '';
