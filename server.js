@@ -51,10 +51,10 @@ io.on('connection', socket => {
     const user = getCurrentUser(socket.id);
 
     io.to(user.room).emit('message', {
-    username:user,fullname,
-    text:msg,
+    username: user.fullname,
+    text: msg,
     time: moment().format('HH:mm:ss'),
-    pic:pic
+    pic: pic
     });
 
   });
