@@ -35,7 +35,7 @@ io.on('connection', socket => {
       .to(user.room)
       .emit(
         'message',
-        formatMessage(botName, `${user.fullname} has joined the chat`)
+        formatMessage(botName, `${user.fullname} has joined the chat`,botName)
       );
 
     // Send users and room info
