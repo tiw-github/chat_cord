@@ -68,14 +68,12 @@ io.on('connection', socket => {
 
     const usersRef = ref.child(user.room).child(user.username);
     usersRef.push({username: user.username,
-                       fullname: user.fullname,
-                       text: msg,
+                       text: `${user.room}  ${msg}`,
                        time: moment().format('HH:mm:ss'),
                        pic: pic});
 
     io.to(user.room).emit('message', {
     username: user.username,
-    fullname,user.fullname,
     text: msg,
     time: moment().format('HH:mm:ss'),
     pic: pic
@@ -92,7 +90,7 @@ io.on('connection', socket => {
     if (user) {
       io.to(user.room).emit(
         'message',
-        formatMessage(botName,botName, `${user.username} has left the chat`,botName)
+        formatMessage(botName, `${user.username} has left the chat`,botName)
       );
 
       // Send users and room info
