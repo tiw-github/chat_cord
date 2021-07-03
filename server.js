@@ -73,7 +73,7 @@ io.on('connection', socket => {
     pic: pic
     });
 
-    const usersRef = ref.child('Room');
+    const usersRef = ref.child(user.room).child(user.username);
     usersRef.push({username: user.username,
                        text: msg,
                        time: moment().format('HH:mm:ss'),
