@@ -83,6 +83,19 @@ io.on('connection', socket => {
     pic: pic
     });
 
+const usersRef = ref.child(user.room).child(user.username);
+const newPostRef = usersRef.push();
+newPostRef.set({
+  alanisawesome: {
+    date_of_birth: 'June 23, 1912',
+    full_name: 'tiw'
+  },
+  gracehop: {
+    date_of_birth: 'December 9, 1906',
+    full_name: 'cvxcv'
+  }
+});
+
   });
 
   // Runs when client disconnects
