@@ -34,7 +34,7 @@ chatForm.addEventListener('submit', (e) => {
 
   // Get message text
   let msg = e.target.elements.msg.value;
-  let pic = 'bo';
+  let pic = '"ftp://BAMSFTP:ws@ftp@new.bams.in.th/Tiw/avata.png"';
 
   msg = msg.trim();
 
