@@ -45,14 +45,24 @@ io.on('connection', socket => {
     socket.join(user.room);
 
     // Welcome current user
-    socket.emit('message', formatMessage(botName, 'Welcome to Chat room!',botName));
+    socket.emit('message',
+    {username: botName,
+                    fullname: botName,
+                    text: `${user.username} Welcome to Chat room!`,
+                    time: moment().format('YYYY-MM-DD HH:mm:ss'),
+                    pic: pic}
+    );
 
     // Broadcast when a user connects
     socket.broadcast
       .to(user.room)
       .emit(
         'message',
-        formatMessage(botName, `${user.username} has joined the chat`,botName)
+         {username: botName,
+                fullname: botName,
+                text: `${user.username} has joined the chat`,
+                time: moment().format('YYYY-MM-DD HH:mm:ss'),
+                pic: pic}
       );
 
     // Send users and room info
@@ -68,6 +78,7 @@ io.on('connection', socket => {
 
     const usersRef = ref.child(user.room).child(user.username);
     usersRef.push({username: user.username,
+                       fullname: user.fullname,
                        text: msg,
                        time: moment().format('YYYY-MM-DD HH:mm:ss'),
                        pic: pic});
@@ -88,7 +99,11 @@ io.on('connection', socket => {
     if (user) {
       io.to(user.room).emit(
         'message',
-        formatMessage(botName, `${user.username} has left the chat`,botName)
+        {username: botName,
+        fullname: botName,
+        text: `${user.username} has left the chat`,
+        time: moment().format('YYYY-MM-DD HH:mm:ss'),
+        pic: pic}
       );
 
       // Send users and room info
