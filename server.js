@@ -66,9 +66,9 @@ io.on('connection', socket => {
   socket.on('chatMessage', ({msg,pic}) => {
     const user = getCurrentUser(socket.id);
 
- const usersRef = ref.child(user.room).child(user.username);
+ const usersRef = ref.child(user.room);
     usersRef.push({username: user.username,
-                       text: `${user.room}  ${msg}`,
+                       text: msg,
                        time: moment().format('HH:mm:ss'),
                        pic: pic});
 
