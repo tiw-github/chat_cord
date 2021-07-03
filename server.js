@@ -15,19 +15,6 @@ const app = express();
 const server = http.createServer(app);
 const io = socketio(server);
 
-var config = {
-    apiKey: "AIzaSyBncKViLetyrOxS9ZobUJKAdRmMwyE0p0c",
-    authDomain: "bams-chat.firebaseapp.com",
-    // For databases not in the us-central1 location, databaseURL will be of the
-    // form https://[databaseName].[region].firebasedatabase.app.
-    // For example, https://your-database-123.europe-west1.firebasedatabase.app
-    databaseURL: "https://bams-chat-default-rtdb.asia-southeast1.firebasedatabase.app",
-  };
-
-  firebase.initializeApp(config);
-
-  // Get a reference to the database service
-  var database = firebase.database();
 
 // Set static folder
 app.use(express.static(path.join(__dirname, 'public')));
