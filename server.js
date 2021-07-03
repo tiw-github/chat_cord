@@ -40,7 +40,7 @@ const roo = 'dtc03||76';
 io.on('connection', socket => {
 
   socket.on('joinRoom', ({ username, room ,deparment,fullname,pic,license}) => {
-    const user = userJoin(socket.id, username, room,deparment,fullname,pic,inout,license);
+    const user = userJoin(socket.id, username, room,deparment,fullname,pic,license);
 
     socket.join(user.room);
 
@@ -65,6 +65,12 @@ io.on('connection', socket => {
   // Listen for chatMessage
   socket.on('chatMessage', ({msg,pic}) => {
     const user = getCurrentUser(socket.id);
+
+ const usersRef = ref.child(user.room).child(user.username);
+    usersRef.push({username: user.username,
+                       text: `${user.room}  ${msg}`,
+                       time: moment().format('HH:mm:ss'),
+                       pic: pic});
 
     io.to(user.room).emit('message', {
     username: user.username,
