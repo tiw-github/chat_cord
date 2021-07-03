@@ -4,6 +4,8 @@ const express = require('express');
 const socketio = require('socket.io');
 const moment = require('moment');
 const formatMessage = require('./utils/messages');
+var admin = require("firebase-admin");
+var serviceAccount = require("./utils/bams-chat.json");
 const {
   userJoin,
   getCurrentUser,
@@ -15,12 +17,16 @@ const app = express();
 const server = http.createServer(app);
 const io = socketio(server);
 
+
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+  databaseURL: "https://bams-chat-default-rtdb.asia-southeast1.firebasedatabase.app"
+});
 // Set static folder
 app.use(express.static(path.join(__dirname, 'public')));
 
 const botName = 'ผีเฝ้าห้อง';
 let numUsers = 0;
-
 
 // Run when client connects
 io.on('connection', socket => {
