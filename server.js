@@ -45,14 +45,14 @@ io.on('connection', socket => {
     socket.join(user.room);
 
     // Welcome current user
-    socket.emit('message', formatMessage(botName, 'Welcome to Chat room!',botName));
+    socket.emit('message', formatMessage(botName,botName, 'Welcome to Chat room!',botName));
 
     // Broadcast when a user connects
     socket.broadcast
       .to(user.room)
       .emit(
         'message',
-        formatMessage(botName, `${user.username} has joined the chat`,botName)
+        formatMessage(botName,botName, `${user.username} has joined the chat`,botName)
       );
 
     // Send users and room info
@@ -66,14 +66,16 @@ io.on('connection', socket => {
   socket.on('chatMessage', ({msg,pic}) => {
     const user = getCurrentUser(socket.id);
 
- const usersRef = ref.child(user.room).child(user.username);
+    const usersRef = ref.child(user.room).child(user.username);
     usersRef.push({username: user.username,
-                       text: `${user.room}  ${msg}`,
+                       fullname: user.fullname
+                       text: msg,
                        time: moment().format('HH:mm:ss'),
                        pic: pic});
 
     io.to(user.room).emit('message', {
     username: user.username,
+    fullname,user.fullname
     text: msg,
     time: moment().format('HH:mm:ss'),
     pic: pic
