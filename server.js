@@ -28,15 +28,17 @@ const ref = db.ref("/chats");
 // Fetch the service account key JSON file contents
 
 // Initialize the app with a service account, granting admin privileges
- const usersRef = ref.child(user.room).child(user.username);
-    const newPostRef = postsRef.push();
-    newPostRef.set( {
-                       username: user.username,
-                       text: data,
-                       time: moment().format('HH:mm:ss'),
-                       pic: pic
-                       });
-
+const usersRef = ref.child('users');
+usersRef.set({
+  alanisawesome: {
+    date_of_birth: 'June 23, 1912',
+    full_name: 'tiw'
+  },
+  gracehop: {
+    date_of_birth: 'December 9, 1906',
+    full_name: 'cvxcv'
+  }
+});
 
 // Set static folder
 app.use(express.static(path.join(__dirname, 'public')));
