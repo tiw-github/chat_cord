@@ -28,7 +28,7 @@ const ref = db.ref("/chats");
 // Fetch the service account key JSON file contents
 
 // Initialize the app with a service account, granting admin privileges
-const usersRef = ref.child('users');
+/*const usersRef = ref.child('users');
 usersRef.set({
   alanisawesome: {
     date_of_birth: 'June 23, 1912',
@@ -38,7 +38,7 @@ usersRef.set({
     date_of_birth: 'December 9, 1906',
     full_name: 'cvxcv'
   }
-});
+});*/
 
 // Set static folder
 app.use(express.static(path.join(__dirname, 'public')));
@@ -62,7 +62,7 @@ io.on('connection', socket => {
       .to(user.room)
       .emit(
         'message',
-        formatMessage(botName, `${user.fullname} has joined the chat`,botName)
+        formatMessage(botName, `${user.username} has joined the chat`,botName)
       );
 
     // Send users and room info
@@ -73,12 +73,12 @@ io.on('connection', socket => {
   });
 
   // Listen for chatMessage
-  socket.on('chatMessage', (data) => {
+  socket.on('chatMessage', ({msg,pic}) => {
     const user = getCurrentUser(socket.id);
 
     io.to(user.room).emit('message', {
     username: user.username,
-    text: data,
+    text: msg,
     time: moment().format('HH:mm:ss'),
     pic: pic
     });
