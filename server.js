@@ -83,9 +83,8 @@ io.on('connection', socket => {
     pic: pic
     });
 
-const usersRef = ref.child(user.room).child(user.username);
-const newPostRef = usersRef.push();
-newPostRef.set({
+const usersRef = ref.child(user.room);
+usersRef.set({
   alanisawesome: {
     date_of_birth: 'June 23, 1912',
     full_name: 'tiw'
