@@ -16,7 +16,12 @@ const {
 const app = express();
 const server = http.createServer(app);
 const io = socketio(server);
+const serviceAccount = require("./utils/bamschat.json");
 
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+  databaseURL: "https://bams-chat-default-rtdb.asia-southeast1.firebasedatabase.app"
+});
 
 
 // Fetch the service account key JSON file contents
