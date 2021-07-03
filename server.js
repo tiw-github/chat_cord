@@ -20,7 +20,7 @@ const io = socketio(server);
 var admin = require("firebase-admin");
 
 // Fetch the service account key JSON file contents
-var serviceAccount = require("./utils/bamschat.json");
+
 
 // Set static folder
 app.use(express.static(path.join(__dirname, 'public')));
