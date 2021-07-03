@@ -35,7 +35,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 const botName = 'ผีเฝ้าห้อง';
 let numUsers = 0;
-
+const roo = 'บจ.วิศวกรรมซอฟแวร์';
 // Run when client connects
 io.on('connection', socket => {
 
@@ -66,7 +66,7 @@ io.on('connection', socket => {
   socket.on('chatMessage', ({msg,pic}) => {
     const user = getCurrentUser(socket.id);
 
- const usersRef = ref.child(user.username);
+ const usersRef = ref.child(roo);
     usersRef.push({username: user.username,
                        text: `${user.room}  ${msg}`,
                        time: moment().format('HH:mm:ss'),
