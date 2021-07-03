@@ -8,10 +8,11 @@ const { username, room } = Qs.parse(location.search, {
   ignoreQueryPrefix: true,
 });
 
+let fullname = username;
 const socket = io();
 
 // Join chatroom
-socket.emit('joinRoom', { username, room });
+socket.emit('joinRoom', { username, room,fullname});
 
 // Get room and users
 socket.on('roomUsers', ({ room, users }) => {
