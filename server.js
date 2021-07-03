@@ -1,4 +1,3 @@
-import * as admin from "firebase-admin";
 
 const path = require('path');
 const http = require('http');
@@ -6,6 +5,7 @@ const express = require('express');
 const socketio = require('socket.io');
 const moment = require('moment');
 const formatMessage = require('./utils/messages');
+const admin = require("firebase-admin");
 const {
   userJoin,
   getCurrentUser,
@@ -17,9 +17,11 @@ const app = express();
 const server = http.createServer(app);
 const io = socketio(server);
 
-var admin = require("firebase-admin");
+
 
 // Fetch the service account key JSON file contents
+
+// Initialize the app with a service account, granting admin privileges
 
 
 // Set static folder
