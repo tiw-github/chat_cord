@@ -85,6 +85,7 @@ io.on('connection', socket => {
 
     io.to(user.room).emit('message', {
     username: user.username,
+    fullname: user.fullname,
     text: msg,
     time: moment().format('YYYY-MM-DD HH:mm:ss'),
     pic: pic
