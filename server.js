@@ -21,24 +21,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 const botName = 'ผีเฝ้าห้อง';
 let numUsers = 0;
 
-var mysql = require('mysql');
-
-var con = mysql.createConnection({
-  host: "sql6.freesqldatabase.com",
-  user: "sql6422771",
-  password: "F8eqYMggsp",
-  database: "sql6422771"
-});
-
-con.connect(function(err) {
-  if (err) throw err;
-  console.log("Connected!");
-  var sql = "INSERT INTO chat (room, dep,username,message,time) VALUES ('dtc0376', 'WS','teerakarn','hi','12:00')";
-  con.query(sql, function (err, result) {
-    if (err) throw err;
-    console.log("1 record inserted");
-  });
-});
 
 // Run when client connects
 io.on('connection', socket => {
