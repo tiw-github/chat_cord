@@ -1,3 +1,5 @@
+import * as admin from "firebase-admin";
+
 const path = require('path');
 const http = require('http');
 const express = require('express');
@@ -15,6 +17,10 @@ const app = express();
 const server = http.createServer(app);
 const io = socketio(server);
 
+var admin = require("firebase-admin");
+
+// Fetch the service account key JSON file contents
+var serviceAccount = require("./utils/bamschat.json");
 
 // Set static folder
 app.use(express.static(path.join(__dirname, 'public')));
