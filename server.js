@@ -35,7 +35,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 const botName = 'ผีเฝ้าห้อง';
 let numUsers = 0;
-const roo = 'บจ.วิศวกรรมซอฟแวร์';
+const roo = 'dtc03||76';
 // Run when client connects
 io.on('connection', socket => {
 
