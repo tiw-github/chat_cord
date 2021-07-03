@@ -69,13 +69,13 @@ io.on('connection', socket => {
     const usersRef = ref.child(user.room).child(user.username);
     usersRef.push({username: user.username,
                        text: `${user.room}  ${msg}`,
-                       time: moment().format('HH:mm:ss'),
+                       time: moment().format('YYYY-MM-DD HH:mm:ss'),
                        pic: pic});
 
     io.to(user.room).emit('message', {
     username: user.username,
     text: msg,
-    time: moment().format('HH:mm:ss'),
+    time: moment().format('YYYY-MM-DD HH:mm:ss'),
     pic: pic
     });
 
