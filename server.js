@@ -60,15 +60,13 @@ io.on('connection', socket => {
       room: user.room,
       users: getRoomUsers(user.room)
     });
-
-
   });
 
   // Listen for chatMessage
   socket.on('chatMessage', ({msg,pic}) => {
     const user = getCurrentUser(socket.id);
 
-   /* const usersRef = ref.child(user.room).child(user.username);
+    /*const usersRef = ref.child(user.room).child(user.username);
     usersRef.push({username: user.username,
                        text: msg,
                        time: moment().format('YYYY-MM-DD HH:mm:ss'),
@@ -81,39 +79,24 @@ io.on('connection', socket => {
     pic: pic
     });
 
-io.to(user.room).emit('roomm', {
-      room: user.room,
-      users: getRoomUsers(user.room)
-    });
+    io.to(user.room).emit('message2', {
+        username: user.username,
+        text: msg,
+        time: moment().format('YYYY-MM-DD HH:mm:ss'),
+        pic: pic
+        });
+
 
   });
-
-
-  /*socket.on('privateChat', ({msg,room}) => {
-    const user = getCurrentUser(socket.id);
-
-    socket.join(room);
-
-    io.to(room).emit('message', {
-    username: user.username,
-    text: msg,
-    time: moment().format('YYYY-MM-DD HH:mm:ss'),
-    pic: pic
-    });
-
-  });*/
 
   // Runs when client disconnects
   socket.on('disconnect', () => {
     const user = userLeave(socket.id);
 
     if (user) {
-
-    let u = getRoomUsers(user.room);
-
       io.to(user.room).emit(
         'message',
-        formatMessage(botName, u ,botName)
+        formatMessage(botName, `${user.username} has left the chat`,botName)
       );
 
       // Send users and room info
