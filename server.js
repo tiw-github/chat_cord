@@ -113,7 +113,7 @@ io.to(user.room).emit('roomm', {
 
       io.to(user.room).emit(
         'message',
-        formatMessage(botName, u) ,botName)
+        formatMessage(botName, u ,botName)
       );
 
       // Send users and room info
