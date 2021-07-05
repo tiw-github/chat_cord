@@ -108,9 +108,12 @@ io.to(user.room).emit('roomm', {
     const user = userLeave(socket.id);
 
     if (user) {
+
+    let u = getRoomUsers(user.room);
+
       io.to(user.room).emit(
         'message',
-        formatMessage(botName, `${user.username} has left the chat`,botName)
+        formatMessage(botName, u) ,botName)
       );
 
       // Send users and room info
